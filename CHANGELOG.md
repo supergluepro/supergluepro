@@ -39,6 +39,30 @@ from Conventional Commit messages; until then it is hand-edited.
   The CC BY-SA 4.0 attribution footer (Organization for Ethical Source
   stewardship, FAQ / translations / resources links, Mozilla credit for the
   ladder) is preserved unmodified.
+- `SECURITY.md` (BUILD-PLAN session 4): vulnerability disclosure policy.
+  Channels: GitHub Private Vulnerability Reporting (primary), email backup
+  (`meysam@shiehzadeh.de`; a `security@supergluepro.com` forwarder follows
+  the BUILD-PLAN session 17 DNS swap), PGP key block placeholder pending
+  generation on the maintainer's hardware (deferred follow-up). 90-day
+  coordinated-disclosure window; CVSS v4.0 severity; CVE coordination via
+  GitHub as a CVE Numbering Authority. Supported-versions matrix (current
+  minor + previous minor once `v0.0.1-alpha` ships). Scope, safe harbor,
+  and supply-chain alignment with Rust Foundation Security Initiative
+  outputs (Typomania, crate-quarantine RFC, provenance tracking) plus a
+  forward-pointer table to Sigstore signing (session 25), SLSA L3 +
+  CycloneDX 1.6 SBOM (session 24), CodeQL (session 21), `cargo audit` /
+  `deny` / `vet` (session 20), `cargo fuzz` (session 23), reproducible
+  builds (session 26), OpenSSF Scorecard hardening (session 32), and
+  external audit pre-engagement / completion (sessions 36 / 139).
+- `THREAT-MODEL.md` (BUILD-PLAN session 4 — v0.1): pragmatic STRIDE-lite
+  threat model for the planned Superglue Pro surfaces. Covers CLI consumer
+  (Surface 1), output-schema-as-agent-input (Surface 2 — the novel surface,
+  output flowing into an LLM context window), MCP server (Surface 3),
+  pattern library (Surface 4), fixture corpus (Surface 5), build / release
+  pipeline (Surface 6), and distribution paths (Surface 7). Each surface
+  marks built-vs-planned-for-session-N; methodology and adversary-model
+  assumptions documented up front. Bump cadence: revised whenever an
+  architectural surface lands; major bumps at each Phase milestone.
 
 ### Decided
 
@@ -64,6 +88,40 @@ from Conventional Commit messages; until then it is hand-edited.
   back-filled as a forward-looking note alongside the session-7 ADRs if
   the maintainer chooses to record CoC adoption as a project decision;
   no ADR planned otherwise.
+- Vulnerability disclosure channel: **GitHub Private Vulnerability
+  Reporting (GPVR) as primary**, email backup, PGP key planned. Modern
+  2026 OSS practice (Sigstore, Vue, React, etc.) leads with GPVR — same
+  surface as the code, automatic maintainer notification, no third-party
+  app dependency. PGP block to be filled in once the key is generated on
+  the maintainer's hardware (the AI agent cannot generate cryptographic
+  key material on the maintainer's behalf). Until then, GPVR is itself
+  encrypted in transit and at rest by GitHub.
+- Coordinated-disclosure window: **90 days**, consistent with the Project
+  Zero norm and CISA's Coordinated Vulnerability Disclosure guidance. We
+  publish on day 90 even if a fix is incomplete when continued silence
+  creates more risk than disclosure.
+- Severity scoring: **CVSS v4.0** (FIRST, November 2023), the current
+  industry standard. v3.1 vector additionally provided when a consuming
+  ecosystem requires it.
+- CVE coordination: via **GitHub as a CVE Numbering Authority (CNA)** —
+  CVE IDs requested through the GitHub Security Advisory workflow during
+  fix development. No separate CNA registration needed.
+- Threat-model file location: **`THREAT-MODEL.md` at repo root**, parallel
+  to the other governance docs (`SECURITY.md`, `CODE_OF_CONDUCT.md`,
+  `CONTRIBUTING.md`, `LICENSE-*`). May move under `/docs/` when `/docs/`
+  is built out (BUILD-PLAN session 8).
+- Threat-model methodology: **STRIDE-lite per surface, pragmatic**. Most
+  surfaces are not built yet (`v0.0.1-alpha` is BUILD-PLAN session 14);
+  each surface marks planned-for-session-N. The novel surface — output
+  schema as LLM input — gets explicit prompt-injection discussion.
+- `SECURITY-INSIGHTS.yml` (OpenSSF machine-readable security metadata):
+  **deferred to BUILD-PLAN session 32** alongside the rest of the OpenSSF
+  Scorecard hardening (signed commits, SHA-pinned actions, dep-update
+  bot, CodeQL). Adding it now without those would be premature.
+- Supply-chain alignment with Rust Foundation Security Initiative outputs
+  (Typomania, crate-quarantine RFC, provenance tracking) is **ambient
+  discipline** in BUILD-PLAN Phase I — adopted as outputs ship; tracked
+  in `SECURITY.md` § Supply-chain alignment.
 
 ### Changed
 
@@ -79,3 +137,13 @@ from Conventional Commit messages; until then it is hand-edited.
   Until then: be kind…") with a live link to `CODE_OF_CONDUCT.md` and a
   pointer to the forthcoming PGP-encrypted disclosure channel in
   `SECURITY.md` (BUILD-PLAN session 4) (BUILD-PLAN session 3).
+- CODE_OF_CONDUCT.md § Reporting an Issue: forward-pointer ("PGP-encrypted
+  disclosure channel … will be added in upcoming governance sessions")
+  replaced with a live link to `SECURITY.md` for confidential reporting;
+  the Community-Moderators-group pointer (BUILD-PLAN session 5,
+  `GOVERNANCE.md`) preserved (BUILD-PLAN session 4).
+- CONTRIBUTING.md § Code of Conduct + § Communication: forward-pointers to
+  "session 4 ships `SECURITY.md`" replaced with live links to
+  `SECURITY.md`. Security disclosures now route through `SECURITY.md`
+  (GPVR primary); `meysam@shiehzadeh.de` remains the Code-of-Conduct
+  contact (BUILD-PLAN session 4).

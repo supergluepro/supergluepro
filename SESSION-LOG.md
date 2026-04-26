@@ -9,6 +9,201 @@ this single-file format is the bootstrap convention until then.
 
 ---
 
+## Session 4 — SECURITY.md + threat-model v0.1 (2026-04-26)
+
+**Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)
+**BUILD-PLAN row:** session 4 — "SECURITY.md + threat-model v0.1"
+
+### Decisions resolved
+
+1. **Disclosure channel: GitHub Private Vulnerability Reporting (GPVR)
+   primary, email backup, PGP key planned.** Modern 2026 OSS practice
+   (Sigstore, Vue, React, Kubernetes-via-private-list, etc.) leads with
+   GPVR — same surface as the code, automatic maintainer notification, no
+   third-party app dependency. Email backup: `meysam@shiehzadeh.de` until
+   the `security@supergluepro.com` forwarder is provisioned (depends on
+   the BUILD-PLAN session 17 DNS swap off the united-domains parking
+   nameservers). PGP key on `meysam@shiehzadeh.de` is **planned but not
+   gating this session**: cryptographic key material must be generated on
+   the maintainer's hardware so the private half never leaves it; the AI
+   agent in this session cannot perform that generation. SECURITY.md
+   ships with a PGP placeholder block; the published key is a deferred
+   follow-up tracked below. GPVR is itself encrypted in transit and at
+   rest by GitHub, so the placeholder does not leave reporters without an
+   encrypted channel.
+2. **Disclosure window: 90 days.** Project Zero norm + CISA Coordinated
+   Vulnerability Disclosure guidance. We publish on day 90 even if a fix
+   is incomplete when continued silence creates more risk than disclosure.
+3. **Severity scoring: CVSS v4.0** (FIRST, November 2023; the default
+   industry standard in 2026, supersedes v3.1). v3.1 vector additionally
+   provided where a consuming ecosystem requires it.
+4. **CVE coordination via GitHub as a CNA.** GitHub has been a CVE
+   Numbering Authority since 2018; CVE IDs are requested through the
+   GitHub Security Advisory workflow during fix development. No separate
+   CNA registration needed.
+5. **Threat-model file location: `THREAT-MODEL.md` at repo root.**
+   Parallels `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`,
+   `LICENSE-*`. BUILD-PLAN doesn't dictate; the choice maximises
+   discoverability at this stage. May move under `/docs/` when `/docs/`
+   is built out alongside the style guide + PR templates in BUILD-PLAN
+   session 8; if so, `SECURITY.md`'s relative link is updated.
+6. **Threat-model methodology: STRIDE-lite per surface, pragmatic.**
+   Most surfaces are not built yet (`v0.0.1-alpha` is BUILD-PLAN session
+   14); each surface is marked planned-for-session-N. The novel surface
+   is **"output schema as LLM input"** — Surface 2 in the document — which
+   is not a traditional file-format threat surface and warrants explicit
+   prompt-injection discussion. Adversary model includes opportunistic
+   mass attacker, targeted attacker against a downstream consumer (the
+   amplification path through Claude Code's context window),
+   malicious contributor, and compromised maintainer credential.
+7. **Supply-chain alignment with Rust Foundation Security Initiative
+   (RFSI)** as ambient discipline (BUILD-PLAN Phase I). Typomania
+   (typosquatting), crate-quarantine RFC, provenance tracking — all
+   named in BUILD-PLAN row 4 — are tracked and adopted as the upstream
+   outputs ship. SECURITY.md § Supply-chain alignment lists them
+   explicitly alongside the BUILD-PLAN-scheduled controls
+   (sessions 18, 20, 21, 23, 24, 25, 26, 32, 36, 139).
+8. **No `SECURITY-INSIGHTS.yml` in this session.** OpenSSF Security
+   Insights v2.x (machine-readable security metadata) is the right
+   vehicle for OpenSSF Scorecard scoring (gate 32 → BUILD-PLAN session
+   32). Adding it now without the rest of the Scorecard hardening
+   (signed commits, SHA-pinned actions, dependency-update bot, CodeQL)
+   would be premature; tracked as a deferred follow-up.
+
+### Files
+
+| Action | Path | Note |
+|---|---|---|
+| add | `SECURITY.md` | Vulnerability disclosure policy. GPVR primary, email backup, PGP placeholder; what to include; 3 business-day acknowledgement / 10 business-day triage; 90-day disclosure timeline; CVSS v4.0; CVE via GitHub CNA; supported-versions matrix; scope; safe harbor; supply-chain alignment with RFSI + forward-pointer table to BUILD-PLAN sessions 18 / 20 / 21 / 23 / 24 / 25 / 26 / 32 / 36 / 139; pointer to `THREAT-MODEL.md`; hall of fame stub. |
+| add | `THREAT-MODEL.md` | v0.1 STRIDE-lite per surface (CLI consumer, output-schema-as-agent-input, MCP server, pattern library, fixture corpus, build/release pipeline, distribution paths). Adversary model + asset inventory + cross-cutting controls + out-of-scope-for-v0.1 list + update-cadence table at the end. |
+| modify | `CODE_OF_CONDUCT.md` | § Reporting an Issue: forward-pointer ("PGP-encrypted disclosure channel … will be added in upcoming governance sessions") replaced with a live link to `SECURITY.md` for confidential reporting; the Community-Moderators-group pointer (BUILD-PLAN session 5, `GOVERNANCE.md`) preserved. |
+| modify | `CONTRIBUTING.md` | § Code of Conduct: forward-pointer ("PGP-encrypted disclosure channel will follow in `SECURITY.md` (BUILD-PLAN session 4)") replaced with a live link. § Communication: split the email-as-security-channel stand-in into a dedicated "Security disclosures → `SECURITY.md`" bullet plus a `meysam@shiehzadeh.de`-as-CoC-contact bullet. |
+| modify | `CHANGELOG.md` | + Added: `SECURITY.md`, `THREAT-MODEL.md`. + Decided: GPVR-primary disclosure, 90-day window, CVSS v4.0, GitHub-CNA, root `THREAT-MODEL.md`, STRIDE-lite, defer `SECURITY-INSIGHTS.yml` to session 32, RFSI alignment as ambient discipline. + Changed: `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` pointer updates. |
+| modify | `SESSION-LOG.md` | This entry. |
+
+### Per-session gate sweep
+
+| # | Gate | Status |
+|---:|---|---|
+| 11 | License + supply-chain green | ✅ No new dependencies introduced. |
+| 12 | Security checklist / SECURITY.md updated | ✅ This **is** the SECURITY.md session. Disclosure surface defined for the first time; subsequent sessions inherit gate 12 as "if your change shifts a surface tracked in `THREAT-MODEL.md`, bump that document's version and re-summarise." |
+| 13 | CHANGELOG.md updated | ✅ Added / Decided / Changed entries land alongside files. |
+| 16 | Glue-only honored | ✅ Adopting GPVR / CVSS v4.0 / CVE-via-GitHub / RFSI as canonical pieces; STRIDE for the threat-model methodology; nothing reinvented. |
+| 1, 2, 3, 4, 17 | Expert / reviewers / RFC / ADR / 48 h public review | ⚠️ Symbolic during bootstrap, same posture as sessions 1+2+3. RFC repo not built yet (BUILD-PLAN session 6); ADR format not built yet (session 7); a session-4 ADR ("Disclosure posture: GPVR primary + 90-day window" or "Threat-model methodology: STRIDE-lite") is at the maintainer's discretion in session 7 — no separate decision rises to ADR-tier on its own, but a forward-looking entry alongside ADR-001..006 would be reasonable. 48 h public-review symbolic on a meta-repo with one contributor. |
+| 5–10, 14–15, 18–19 | Test/perf/repro/SemVer/SBOM/random-repo | N/A — no Rust code, no CI matrix, no release, no fixture corpus at this stage. |
+
+### Deferred follow-ups
+
+- **PGP key generation (carry-over from BUILD-PLAN row 4).** The
+  maintainer must generate a PGP key on `meysam@shiehzadeh.de` on their
+  own hardware (passphrase choice, entropy sources, secure storage of
+  the private key — operations the AI agent cannot perform on the
+  maintainer's behalf). Once generated:
+  - Publish the public key to `keys.openpgp.org`.
+  - Add the public key to the maintainer's GitHub GPG settings (so
+    commits can be GPG-signed independently of the `gitsign` work in
+    BUILD-PLAN session 18).
+  - Update `SECURITY.md` § PGP with the fingerprint, the keyserver URL,
+    the `github.com/<handle>.gpg` URL, and the inline ASCII-armored
+    public key block.
+  - Update `CHANGELOG.md` Unreleased § Added with the publication entry.
+  Candidate for `/schedule` background-agent reminder if the maintainer
+  wants a one-time nudge in 1–2 weeks.
+- **`security@supergluepro.com` forwarder provisioning.** united-domains
+  panel supports email forwarding on `supergluepro.com`. Configure
+  `security@` → `meysam@shiehzadeh.de` once the BUILD-PLAN session 17
+  DNS swap is performed (or earlier, if forwarding is configurable
+  while DNS is still on the parking nameservers). Until then,
+  SECURITY.md lists `meysam@shiehzadeh.de` directly as the email backup.
+  Operational, not session-scoped.
+- **Session 5 (next) — `GOVERNANCE.md`.** Documents the TSC promotion
+  path (≥3 maintainers triggers TSC formation per BUILD-PLAN row 5).
+  When a TSC is later seated, update **CODE_OF_CONDUCT.md § Reporting an
+  Issue** to refer to the seated Community Moderators group rather than
+  the single maintainer. No file edit needed in session 5 itself unless
+  a TSC is seated then; the bootstrap-maintainer language is correct
+  until that happens.
+- **Session 7 — ADR back-fills.** Maintainer's choice on whether to
+  record "Disclosure posture: GPVR primary + 90-day window + CVSS v4.0
+  + GitHub-CNA" or "Threat-model methodology: STRIDE-lite per surface"
+  as ADR-007 / ADR-008 alongside the planned ADR-001 (license),
+  ADR-002 (brand), ADR-003 (DCO over CLA), ADR-004 (in-repo Action over
+  Probot DCO), ADR-005 (MCP as v1.0 architecture), ADR-006 (Claude Code
+  as primary consumer). Rationale already lives in this log +
+  `SECURITY.md` + `THREAT-MODEL.md` whether or not an ADR is created.
+- **Session 18 — Sigstore `gitsign` for signed commits.** Once live,
+  `SECURITY.md` § Supply-chain forward-pointer table updates from
+  "planned" to "live."
+- **Session 20 — `cargo audit` / `cargo deny` / `cargo vet` + Renovate.**
+  Same flip "planned" → "live" in `SECURITY.md` § Supply-chain table.
+- **Session 21 — CodeQL.** Same.
+- **Session 23 — `cargo fuzz`.** Same; also folds into `THREAT-MODEL.md`
+  Surface 1 mitigations (currently noted as "planned, sessions 23, 29").
+- **Session 24 — SLSA L3 + CycloneDX 1.6 SBOM.** Same.
+- **Session 25 — Sigstore-signed releases + crates.io Trusted
+  Publishing.** Same; also folds into `THREAT-MODEL.md` Surface 6.
+- **Session 32 — OpenSSF Scorecard ≥9.5 hardening.** `SECURITY-INSIGHTS.yml`
+  (machine-readable security metadata) lands here, alongside SHA-pinned
+  third-party actions. `THREAT-MODEL.md` bumps to a new version
+  reflecting the hardened build pipeline.
+- **End of Phase A (when `supergluepro/superglue` flips public):**
+  Replicate `SECURITY.md` and `THREAT-MODEL.md` in that repo with
+  code-side surfaces concretised. The meta-repo's `THREAT-MODEL.md`
+  references mostly planned-for-session-N surfaces; the production repo
+  will have most of them built by then. The meta-repo's documents
+  remain authoritative for governance / disclosure policy; the
+  production repo's documents extend with code-specific threat surfaces
+  (specific signal extractors, ast-grep matcher engine, walker bounds
+  enforcement).
+- **Phase H end (sessions 129, 130, 132, 136 onward):** Add the WASM
+  playground, embeddings model, LLM-judge model, and cross-repo
+  federation surfaces to `THREAT-MODEL.md` as they ship. Bump to v2.0
+  alongside the `v2.0.0` release tag.
+
+### State for the next session
+
+Tracked tree at the end of session 4:
+
+```
+.github/
+  workflows/
+    dco.yml          — DCO Signed-off-by enforcement on every PR
+.gitignore           — standard + .claude/settings.local.json + user-text.txt excluded
+BUILD-PLAN.md        — v10, "Resolved decisions" section
+CHANGELOG.md         — Keep-a-Changelog 1.1.0; sessions 1+2+3+4 entries under [Unreleased]
+CODE_OF_CONDUCT.md   — Contributor Covenant 3.0 verbatim; § Reporting now links to SECURITY.md
+CONTRIBUTING.md      — DCO + Conventional Commits; § Code of Conduct + § Communication now link to SECURITY.md
+LICENSE-APACHE       — Apache 2.0 full text
+LICENSE-MIT          — MIT
+NOTICE               — minimal Apache-style notice
+README.md            — License + Contributing pointer
+SECURITY.md          — Vulnerability disclosure policy: GPVR primary, email backup, PGP placeholder; 90-day window; CVSS v4.0; CVE via GitHub CNA; supported-versions; scope; safe harbor; supply-chain alignment + forward-pointer table
+SESSION-LOG.md       — sessions 1+2+3+4
+THREAT-MODEL.md      — v0.1 STRIDE-lite per surface (CLI, output-schema-as-LLM-input, MCP server, pattern library, fixture corpus, build/release, distribution); adversary model; asset inventory; update cadence
+```
+
+Untracked / gitignored: `.claude/settings.local.json` and `user-text.txt`.
+
+Session 5 (`GOVERNANCE.md` + steering structure) is the next BUILD-PLAN
+row. Single-maintainer with documented TSC promotion path (≥3 maintainers
+triggers TSC formation per BUILD-PLAN row 5). Deliverables to scope at the
+top of session 5:
+
+- `GOVERNANCE.md` documenting decision-making, role definitions
+  (maintainer, committer, reviewer), the TSC promotion path, succession
+  plan, and conflict-of-interest disclosure norms.
+- Cross-file pointer back-links once roles are defined: CODE_OF_CONDUCT.md
+  § Reporting an Issue (Community Moderators group becomes a real
+  reference if a TSC is seated then), SECURITY.md (triage group reference
+  if applicable), CONTRIBUTING.md § Where things live (TSC table row
+  added when applicable).
+- The session-3 follow-up about CODE_OF_CONDUCT.md § Reporting referring
+  to the seated Community Moderators group becomes actionable in
+  session 5 **only if** a TSC is seated then; otherwise the
+  bootstrap-maintainer language continues to be correct.
+
+---
+
 ## Session 3 — CODE_OF_CONDUCT.md (Contributor Covenant 3.0) (2026-04-26)
 
 **Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)

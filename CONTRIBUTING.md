@@ -170,8 +170,10 @@ in-repo workflow over Probot DCO app, `ADR-005` MCP as v1.0 architecture,
 This project adopts the [Contributor Covenant 3.0](CODE_OF_CONDUCT.md)
 verbatim, with project-specific reporting details substituted into the two
 adopter placeholders. Conduct concerns can be raised at
-<meysam@shiehzadeh.de>; a PGP-encrypted disclosure channel for confidential
-reports will follow in `SECURITY.md` (BUILD-PLAN session 4).
+<meysam@shiehzadeh.de>. For confidential reporting (including security
+disclosures and sensitive Code-of-Conduct concerns), see
+[SECURITY.md](SECURITY.md) — GitHub Private Vulnerability Reporting is the
+preferred channel; an email backup is also documented there.
 
 ## License
 
@@ -186,6 +188,8 @@ agreement is required beyond the DCO sign-off.
 - **GitHub Discussions** — open-ended questions, design conversations,
   community chatter. The only community surface until ≥1k stars (per
   BUILD-PLAN constraint: no Discord / Slack pre-traction).
-- **`meysam@shiehzadeh.de`** — security disclosures (until session 4 ships
-  `SECURITY.md` with PGP key + dedicated channel) and Code of Conduct
-  concerns.
+- **Security disclosures** — see [SECURITY.md](SECURITY.md). Preferred
+  channel is GitHub Private Vulnerability Reporting; an email backup and
+  the planned PGP key are documented there.
+- **`meysam@shiehzadeh.de`** — Code of Conduct concerns (per
+  [CODE_OF_CONDUCT.md § Reporting an Issue](CODE_OF_CONDUCT.md#reporting-an-issue)).
