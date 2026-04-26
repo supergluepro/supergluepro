@@ -29,13 +29,6 @@ Production code, patterns, AI_CONTEXT templates, and grammar integrations live i
 - `v1.0.0` — end of Phase D (~6–8 months in). Feature-complete, MCP-native, 11+ install paths, validated through every install path.
 - `v2.0.0` — end of Phase H (~14–22 months in). Embeddings + LLM-judge + WASM playground + cross-repo federation.
 
-## Open decisions before session 1
-
-Two questions gate the first sessions:
-
-1. **Trademark + naming.** "Superglue" alone collides with [superglue.com](https://superglue.com) (a B2B integration tool). Working name throughout this plan is "Superglue Pro" matching the org name. Decision required: register `Superglue Pro` as the OSS trademark, rename pre-launch, or stay generic.
-2. **License.** Working assumption is `MIT OR Apache-2.0` dual (Rust ecosystem standard, matches existing `Cargo.toml` declaration). Apache-2.0 alone is the alternative. Decision required before session 1.
-
 ## Constraints
 
 - **Single GitHub home.** All public surface is on GitHub. `supergluepro.com` redirects here; no separate marketing site, docs site, or hosted offering.
@@ -44,3 +37,20 @@ Two questions gate the first sessions:
 - **Permissive OSS, free for commercial use.** No proprietary core, no AGPL/SSPL/BSL, no dual-licensing games.
 - **Claude Code is the canonical consumer.** Humans hint; Claude Code runs. CLI ergonomics, output schemas, MCP tools, and docs all optimise for that flow.
 - **Tool runnable from end of Phase A.** `v0.0.1-alpha` ships at session 14; the senior dev for any later session can ask Claude Code to verify the latest implementation against any open GitHub repo.
+
+## License
+
+Licensed under either of:
+
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or
+  <https://www.apache.org/licenses/LICENSE-2.0>)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or
+  <https://opensource.org/license/mit>)
+
+at your option. SPDX identifier: `MIT OR Apache-2.0`.
+
+### Contribution
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this project by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.

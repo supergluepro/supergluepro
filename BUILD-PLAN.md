@@ -55,26 +55,28 @@ The 17-gate per-session contract (next section) plus gate 19 (random-repo CI smo
 | **Tool runnable end-to-end by end of Phase A** | `v0.0.1-alpha` released at session 14. Every downstream session must keep the tool runnable; a session that breaks `superglue` against the fixture corpus does not merge. |
 | **Random-open-repo testing is a hard CI gate** | From session 15 onward, every PR's CI runs the pinned fixture corpus (gate 19). Failures attached to the PR block merge unless triaged + intentionally accepted via ADR. |
 
-## Open decisions before session 1
+## Resolved decisions
 
-These two questions gate the first sessions and must be answered first.
+Both questions that previously gated session 1 were resolved on 2026-04-26 before session 1 ran. Recorded here for future session leads; will be back-filled as ADR-001 (license) and ADR-002 (trademark / brand) in session 7 once the ADR format is established.
 
-### 1. Trademark + naming
+### 1. Trademark + naming — stay generic; brand anchored by domain + GitHub org
 
-"Superglue" alone collides with [superglue.com](https://superglue.com) (B2B integration tool). Three options:
+No formal trademark registration. The brand "Superglue Pro" is anchored by:
 
-- **Register `Superglue Pro`** as the OSS trademark; matches org name. Globally registrable.
-- **Rename pre-launch** to a distinct mark (`ctxr`, `tier`, `repocontext`, `archlens`, others).
-- **Stay generic** — no trademark, rely on `supergluepro` org as the anchor.
+- **`supergluepro.com`** — registered 2026-04-15 via united-domains GmbH (DE), expires 2027-04-15. Holder: Dipl.-Ing.(FH) Meysam Shiehzadeh. Becomes the GitHub redirect in session 17.
+- **`supergluepro` GitHub org** — canonical code home; already exists.
+- **Project display name** — "Superglue Pro" used consistently throughout BUILD-PLAN, README, NOTICE, LICENSE attribution, and any future MCP tool / package metadata.
 
-Working assumption throughout this plan: **register `Superglue Pro`**. Confirm or override before session 1.
+Rationale: a registered trademark adds legal cost and ongoing renewal/defence burden for marginal benefit on a permissive-OSS project where the domain + org pair already prevents naïve namespace collision. The "Pro" suffix and the AI-coding-agent positioning differentiate cleanly from [superglue.com](https://superglue.com) (B2B integration tool, different category and audience). Formal registration remains an option later if a confusing fork or squatter materialises; for now we stay generic.
 
-### 2. License
+Operational follow-ups (tracked, not gating):
 
-- **`MIT OR Apache-2.0` dual** — Rust ecosystem standard. Matches existing `Cargo.toml` workspace declaration. Downstream consumers pick. **Recommended.**
-- **Apache-2.0 alone** — clearer patent grant, matches Kubernetes / Envoy / Tekton convention.
+- Set a calendar reminder before 2027-04-15 to renew `supergluepro.com` (or switch to multi-year / auto-renew via the united-domains panel).
+- DNS for `supergluepro.com` currently sits on united-domains parking nameservers (`ns.udag.de` / `ns.udag.net` / `ns.udag.org`); session 17 swaps in records to redirect to the GitHub org.
 
-Both are permissive and "free for commercial use." Decide before session 1.
+### 2. License — `MIT OR Apache-2.0` dual
+
+Shipped in session 1. SPDX: `MIT OR Apache-2.0`. Copyright holder: `Dipl.-Ing.(FH) Meysam Shiehzadeh`. Files: `LICENSE-MIT`, `LICENSE-APACHE`, `NOTICE`. Rust-ecosystem standard; downstream consumers pick at use time. Inbound contributor licensing is dual-licensed-to-match per the README's Apache-2.0-§5-style clause.
 
 ---
 

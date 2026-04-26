@@ -22,3 +22,9 @@ Cargo.lock
 # Local env
 .env
 .env.local
+
+# Claude Code (user-local)
+.claude/settings.local.json
+
+# Personal session-runner scratch
+user-text.txt
