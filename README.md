@@ -17,7 +17,7 @@ A CLI that walks a codebase, runs seven signals (git churn, comment density, com
 - [`BUILD-PLAN.md`](BUILD-PLAN.md) — the 141-session sequence: foundation + early runnable alpha (Phase A), quality hardening (B), MCP rearchitecture (C), distribution (D), pattern library (E), grammar expansion (F), IDE extensions (G), advanced features (H)
 - Governance scaffolding (added across [Phase A](BUILD-PLAN.md#phase-a--foundation--early-runnability-sessions-117) sessions): LICENSE, CONTRIBUTING, CODE_OF_CONDUCT (Contributor Covenant 3.0), SECURITY, GOVERNANCE
 - Architectural Decision Records (`/adr/`, populated from session 7 onward; ADR-006 freezes "Claude Code as primary consumer")
-- RFC repository pointer (lives at `supergluepro/rfcs`, populated from session 6 onward)
+- RFC repository pointer (lives at [`supergluepro/rfcs`](https://github.com/supergluepro/rfcs); the repo's [process README](https://github.com/supergluepro/rfcs#readme) documents the comment-window matrix and reviewer requirements)
 - Fixture-corpus pointer (lives at `supergluepro/fixture-corpus`, created in session 15) — 50+ pinned open GitHub repos that CI runs `superglue` against on every PR
 
 Production code, patterns, AI_CONTEXT templates, and grammar integrations live in `supergluepro/superglue`.
@@ -44,8 +44,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process. Highlights: every
 commit must carry a [DCO `Signed-off-by:` trailer](CONTRIBUTING.md#dco-developer-certificate-of-origin)
 (`git commit -s`) — enforced on every PR by [`.github/workflows/dco.yml`](.github/workflows/dco.yml).
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
-Architectural changes go through an RFC ([`supergluepro/rfcs`](https://github.com/supergluepro/rfcs),
-populated from session 6); internal "why this not that" decisions go into ADRs
+Architectural changes go through an RFC ([`supergluepro/rfcs`](https://github.com/supergluepro/rfcs)); internal "why this not that" decisions go into ADRs
 in this repo's `/adr/` (populated from session 7).
 
 ## License

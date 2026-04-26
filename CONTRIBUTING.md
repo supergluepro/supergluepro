@@ -16,7 +16,7 @@ documented here apply org-wide.
 |---|---|---|
 | `supergluepro/supergluepro` (this) | Build plan, governance, ADRs, RFC index, session log | Public |
 | [`supergluepro/superglue`](https://github.com/supergluepro/superglue) | Rust workspace, patterns, MCP server | Private until end of Phase A |
-| `supergluepro/rfcs` | RFC discussions (Rust-language-team-style) | Public from session 6 |
+| `supergluepro/rfcs` | RFC discussions (Rust-language-team-style) | Public |
 | `supergluepro/patterns` | Pattern library | Public from Phase E |
 | `supergluepro/fixture-corpus` | 50+ pinned random-open-repo fixtures + CI rail | Public from session 15 |
 | `supergluepro/supergluepro.github.io` | Single-page redirect from `supergluepro.com` | Public |
@@ -153,9 +153,15 @@ matches the existing session-1 commit pattern.
 ## RFCs
 
 Architectural changes require an RFC merged before code starts. RFCs live in
-[`supergluepro/rfcs`](https://github.com/supergluepro/rfcs) once that repo is
-created in session 6. Format: Rust-language-team RFC template; minimum 10-day
-public comment window; two reviewer approvals.
+[`supergluepro/rfcs`](https://github.com/supergluepro/rfcs); the repo's
+[process README](https://github.com/supergluepro/rfcs#readme) documents the
+[comment-window matrix](https://github.com/supergluepro/rfcs#comment-windows-and-reviewer-requirements)
+(10 days routine architectural / 30 days governance / 30 days
+first-additional-maintainer / 14 days subsequent maintainer / ≥5 days
+emergency), the FCP cadence, and the RFC → ADR back-fill rule. Format:
+[`text/0000-template.md`](https://github.com/supergluepro/rfcs/blob/main/text/0000-template.md)
+adapted from the Rust language team's RFC template; ≥2 reviewer approvals,
+at least one from a different specialty than the author (gate 2).
 
 ## ADRs
 

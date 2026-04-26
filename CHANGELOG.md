@@ -80,6 +80,31 @@ from Conventional Commit messages; until then it is hand-edited.
   supermajority-once-seated). Adapts the CNCF Project Template +
   Minimum Viable Governance v1 scaffold; attribution preserved in the
   document footer.
+- New repo [`supergluepro/rfcs`](https://github.com/supergluepro/rfcs)
+  (BUILD-PLAN session 6): the project's RFC home for the entire
+  `supergluepro/*` GitHub organisation. Eight files at root-commit:
+  `README.md` (full RFC process: when-to-RFC trigger matrix, before-creating
+  checklist, 8-step process, comment-window matrix [10/30/30/14/5 days
+  for routine architectural / governance / first-additional-maintainer /
+  subsequent-maintainer / emergency], 7-day FCP, RFC → ADR back-fill rule
+  per BUILD-PLAN sequencing rule 6, postponement, attribution to
+  `rust-lang/rfcs`); `text/0000-template.md` (RFC template adapted from
+  the Rust language team's `0000-template.md`); `CONTRIBUTING.md` (short
+  discoverability stub pointing to the README and the meta-repo for
+  org-wide DCO / Conventional Commits / CoC / SECURITY norms); `LICENSE-MIT`
+  + `LICENSE-APACHE` + `NOTICE` (dual MIT OR Apache-2.0 with attribution
+  to `rust-lang/rfcs`); `.github/workflows/dco.yml` (mirrored verbatim
+  from meta-repo so sign-off enforcement is parity-equivalent across
+  `supergluepro/*`); `.gitignore` (minimal; markdown-only repo). Created
+  via `gh repo create supergluepro/rfcs --public --source=. --remote=origin
+  --push` over an already-authenticated `gh` session (SSH transport per
+  the project's "SSH-only for `supergluepro/*`" rule; `gh auth login`
+  not invoked). All forward-pointers to "once `supergluepro/rfcs` is
+  created in session 6" in `BUILD-PLAN.md`, `README.md`, and
+  `CONTRIBUTING.md` are now live. `GOVERNANCE.md`'s parenthetical hedges
+  remain in place per session-5's deferred follow-up ("no file edit
+  needed in `GOVERNANCE.md` itself") and the higher-bar self-update
+  process (any GOVERNANCE.md edit needs an RFC + 30-day window).
 
 ### Decided
 
@@ -187,6 +212,84 @@ from Conventional Commit messages; until then it is hand-edited.
   onboarding.** Until then the single roster entry lives in
   GOVERNANCE.md § Current roster. Splitting it out before there is a
   second name would be over-architecture.
+- RFC repo location: **`supergluepro/rfcs`** per BUILD-PLAN row 6.
+  Public from day one (created via `gh repo create supergluepro/rfcs
+  --public --source=. --remote=origin --push` against an
+  already-authenticated `gh` session; SSH transport; no `gh auth
+  login` invoked).
+- RFC template source: **the Rust language team's
+  [`0000-template.md`](https://github.com/rust-lang/rfcs/blob/master/0000-template.md)
+  adapted for Superglue Pro.** Same structural skeleton (Summary /
+  Motivation / Guide-level / Reference-level / Drawbacks / Rationale
+  and alternatives / Prior art / Unresolved / Future possibilities)
+  preserved so anyone familiar with the Rust RFC format is drop-in
+  compatible. Substantive adaptations: header references
+  (`rust-lang/rfcs` → `supergluepro/rfcs`; `rust-lang/rust` →
+  `supergluepro/superglue` with a note that governance-only RFCs
+  use `supergluepro/supergluepro`); body framing ("Rust" /
+  "Rust programmer" → "Superglue Pro" / "Superglue Pro
+  contributor"); the "could this be done in a library or macro"
+  rationale prompt becomes "could this be done as a downstream
+  pattern pack or a separate tool consuming the existing output
+  schema."
+- RFC process documentation source: **the Rust RFCs README adapted
+  for Superglue Pro**. Same numbered-step process (fork → copy
+  template → fill → PR → rename to PR-number → consensus → FCP →
+  decision). Substantive adaptations: comment-window matrix
+  (10/30/30/14/5 days) matched to GOVERNANCE.md decision
+  categories; explicit RFC → ADR back-fill rule per BUILD-PLAN
+  sequencing rule 6; BUILD-PLAN-and-gate-19 framing rather than
+  Rust's sub-team / `rfcbot` automation (overkill at
+  single-maintainer pre-alpha; revisitable later via an RFC
+  against this repo).
+- FCP duration: **7 days, manually announced** by a maintainer in
+  a PR comment with a stated disposition (merge / close /
+  postpone). No automation bot in this repo at present; if the
+  project later wants `rfcbot`-style automation, that lands via
+  an RFC against this very repo.
+- DCO workflow in the new repo: **mirrored verbatim** from the
+  meta-repo's `.github/workflows/dco.yml` (same file content,
+  same TODO-session-32 SHA-pinning marker). Sign-off
+  enforcement is parity-equivalent across all `supergluepro/*`
+  repos.
+- License of the new repo: **`MIT OR Apache-2.0` dual** (matches
+  meta-repo and the production-code repo). DCO sign-off on every
+  commit is the inbound-licensing attestation;
+  Apache-2.0-§5-style inbound clause in the meta-repo's README
+  is the actual licensing mechanism (cross-referenced).
+- Cross-specialty reviewer requirement (gate 2) and ≥2-reviewer
+  requirement: documented in the new repo's README as
+  **substantively binding once Reviewers join the role ladder**;
+  symbolic during single-maintainer bootstrap, same posture as
+  gate 17 (48 h public review).
+- Per-repo doc layout: **no separate `MAINTAINERS`,
+  `CODE_OF_CONDUCT.md`, `SECURITY.md`, or `GOVERNANCE.md`** in
+  `supergluepro/rfcs`. Org-wide governance / CoC / disclosure /
+  maintainer roster live in the meta-repo and are linked from the
+  new repo's README and CONTRIBUTING.md. When the production-code
+  repo flips public at end of Phase A, it carries its own
+  CONTRIBUTING.md (Rust-toolchain-specific) but inherits the
+  meta-repo's governance / CoC / SECURITY documents.
+- ADR back-fill posture for session 6: **defer to session 7**,
+  same as sessions 1–5. The session-7 ADR back-fill list does
+  not currently include an RFC-process ADR; the maintainer
+  chooses whether to add `ADR-008 — RFC repo + process: Rust-
+  language-team-style adaptation with Superglue-Pro-specific
+  comment-window matrix` alongside the planned ADR-001..006
+  (and optional ADR-007 governance) back-fills in session 7.
+- `GOVERNANCE.md`: **no edits this session.** Per session-5's
+  deferred follow-up ("No file edit needed in `GOVERNANCE.md`
+  itself; the path works whether or not the repo is created
+  yet"), the parenthetical "(once that repo is created in
+  BUILD-PLAN session 6)" hedges in `GOVERNANCE.md § Adding the
+  first additional maintainer` (step 1) and `§ Architectural
+  changes` (step 1) remain in place as historical context. They
+  are clearly time-stamped to session 6 and become charming
+  anchors rather than actively misleading wording. Cleaning them
+  up would be a governance-document edit and would strictly
+  require an RFC + 30-day window per the higher-bar self-update
+  process; deferred until a substantive GOVERNANCE.md RFC opens
+  for unrelated reasons.
 
 ### Changed
 
@@ -218,3 +321,26 @@ from Conventional Commit messages; until then it is hand-edited.
   step 7 ("becomes binding once a second maintainer is added") now links
   to `GOVERNANCE.md § Adding the first additional maintainer` (BUILD-PLAN
   session 5).
+- README.md (BUILD-PLAN session 6): § What lives in this repo bullet
+  "RFC repository pointer (lives at `supergluepro/rfcs`, populated from
+  session 6 onward)" replaced with a live link to the new repo plus a
+  pointer to its [process README](https://github.com/supergluepro/rfcs#readme).
+  § Contributing parenthetical "(populated from session 6)" removed
+  from the inline RFC reference (now redundant — the repo is live).
+- BUILD-PLAN.md (BUILD-PLAN session 6): § What lives where table —
+  `supergluepro/rfcs` row's Visibility cell flipped from
+  "Public (created in session 6)" to "Public" + the Purpose cell
+  expanded with a pointer to the repo's process README. No row
+  added or removed; no scheduling changes.
+- CONTRIBUTING.md (BUILD-PLAN session 6): § Where things live table —
+  `supergluepro/rfcs` row's Visibility cell flipped from "Public from
+  session 6" to "Public". § RFCs paragraph replaced — placeholder
+  ("once that repo is created in session 6") removed; replaced with
+  live links to the new repo's [process README](https://github.com/supergluepro/rfcs#readme),
+  the [comment-window matrix anchor](https://github.com/supergluepro/rfcs#comment-windows-and-reviewer-requirements),
+  and the [`text/0000-template.md`](https://github.com/supergluepro/rfcs/blob/main/text/0000-template.md)
+  template. The minimum 10-day routine architectural window
+  remains (matching GOVERNANCE.md), with the longer windows
+  (30 days governance / 30 days first-additional-maintainer / 14
+  days subsequent maintainer / ≥5 days emergency) now documented
+  in the linked matrix rather than in this CONTRIBUTING file.

@@ -402,7 +402,7 @@ Not numbered sessions; ambient discipline that runs from Phase A onward.
 |---|---|---|
 | `supergluepro/supergluepro` (this repo) | Public | OSS planning home: build plan, governance scaffolding, ADRs, RFCs index. The "meta" repo. |
 | `supergluepro/superglue` | Currently private; flips public end of Phase A | Production code, patterns, AI_CONTEXT templates, grammar integrations. The Rust workspace. |
-| `supergluepro/rfcs` | Public (created in session 6) | RFC discussions for architectural changes. Rust-language-team-style. |
+| `supergluepro/rfcs` | Public | RFC discussions for architectural changes. Rust-language-team-style template; comment-window matrix and reviewer requirements live in the repo's [process README](https://github.com/supergluepro/rfcs#readme). |
 | `supergluepro/patterns` | Public (created in Phase E) | Pattern library separated from main code repo for easier external PRs. |
 | `supergluepro/fixture-corpus` | Public (created in session 15) | Random-open-repo fixture corpus: pinned SHAs, baseline `SUPERGLUE.md` + `manifest.json` snapshots, CI workflow, transparency log. The testing spine of the project. |
 | `supergluepro/supergluepro.github.io` | Public | Single-page static redirect from `supergluepro.com` to the GitHub org; later hosts WASM playground at `/playground` (session 136). |
