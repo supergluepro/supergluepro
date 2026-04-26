@@ -9,6 +9,248 @@ this single-file format is the bootstrap convention until then.
 
 ---
 
+## Session 5 — GOVERNANCE.md + steering structure (2026-04-26)
+
+**Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)
+**BUILD-PLAN row:** session 5 — "GOVERNANCE.md + steering structure"
+
+### Decisions resolved
+
+1. **Structural skeleton: CNCF Project Template + Minimum Viable
+   Governance v1 (MVG).** Same posture as sessions 1–4 ("adopt
+   canonical, customise minimally, preserve attribution") — both are
+   Apache-2.0 / CC-BY-4.0, used by Kubernetes / Envoy / Prometheus /
+   OpenTelemetry / Sigstore, and explicitly intended for downstream
+   adoption with project-specific tailoring. Heavier alternatives
+   (Apache Software Foundation PMC/IPMC, Rust Project Leadership
+   Council + Teams) are appropriate for graduated, multi-org-funded
+   projects; CNCF MVG is the right scaffold for a single-maintainer
+   pre-alpha with a clear path to formal governance. No GOVERNANCE.md
+   was reinvented from scratch; the project-specific tailoring is the
+   TSC trigger threshold (BUILD-PLAN-mandated), the role-ladder
+   description, and the succession plan.
+2. **TSC trigger threshold: ≥3 active maintainers in the prior 6
+   months.** The threshold itself is mandated by BUILD-PLAN row 5
+   ("≥3 maintainers triggers TSC formation"). The active-window
+   qualification is the CNCF norm and makes the trigger objectively
+   measurable rather than a head-count of past appointees who may have
+   gone inactive. Active = at least one substantive contribution,
+   review, or RFC engagement in the prior 6 months.
+3. **Role ladder: User → Contributor → Reviewer → Committer →
+   Maintainer → TSC (latent).** The CNCF five-plus-one ladder.
+   Documented up front so future contributors can step into them
+   naturally; at single-maintainer pre-alpha, the four upper rungs are
+   filled by the same person. Each rung has explicit promotion
+   criteria (sustained activity time + nomination + approval window +
+   approval threshold).
+4. **First-additional-maintainer transition gets extra ceremony.**
+   Subsequent maintainer additions follow the standard 14-day RFC
+   window; the *first* additional maintainer gets a 30-day window plus
+   a published transition plan (which repos receive merge rights
+   immediately, which require a probation period). Reasoning: the
+   transition from one maintainer to two is the most consequential in
+   the project's life — it is the point at which gate 17 (48 h public
+   review window) becomes substantively binding rather than symbolic
+   self-discipline, and the point at which decision-making moves from
+   "the founding maintainer chooses" to "two people must agree."
+5. **TSC default composition: 5 seats, 1-year staggered terms,
+   ⅔-supermajority for governance / security / license / brand / CNCF
+   decisions, simple majority for routine motions, ≤⅔ from a single
+   employer.** Standard CNCF defaults; revisitable by RFC once the
+   trigger fires and real composition is being decided. The single
+   most important constraint is the single-employer cap to keep
+   decision-making independent of any single sponsor.
+6. **Succession & continuity posture: pragmatic, document the
+   practical chain.** Domain transfer via united-domains GmbH (DE)
+   standard procedures (auth code retrieval, transfer to a successor's
+   chosen registrar; next-of-kin or estate executor contacts the
+   registrar with proof of authority). GitHub organisation transfer
+   per [GitHub's deceased-user policy](https://docs.github.com/en/site-policy/other-site-policies/github-deceased-user-policy)
+   rather than credential recovery. **Dual `MIT OR Apache-2.0` license
+   means any contributor may fork without permission** — this is the
+   ultimate safety net. Pre-`v0.1.0` no signing keys exist; once
+   BUILD-PLAN session 25 ships Sigstore-keyless OIDC, there is no
+   long-lived secret to transfer (by design of the keyless flow).
+7. **Conflict-of-interest disclosure scope: three categories.**
+   Employer / primary contracting relationship; substantial financial
+   relationship with a downstream consumer (>USD 1,000/month or >0.1%
+   equity as a default soft threshold); authorship or maintenance of a
+   directly-competing tool (Repomix, gitingest, Aider repo-map,
+   similar code-context extractors). Disclosures live publicly in
+   GOVERNANCE.md § Current roster (or in `MAINTAINERS` once that file
+   exists). Recusal expected for votes where the conflict applies; a
+   recused vote does not count toward quorum or supermajority
+   denominators.
+8. **GOVERNANCE.md self-update process: higher bar than other
+   public-surface changes.** RFC + **30-day window** (3× the routine
+   10-day RFC window — governance changes deserve more time to surface
+   concerns) + (until TSC seated) all maintainers approve, (once TSC
+   seated) TSC supermajority with recused votes excluded from the
+   denominator. Emergency exceptions (security / legal) may use a
+   shortened ≥5-day window with public reasoning attached to the RFC,
+   ratified or reverted at the next governance review.
+9. **`MAINTAINERS` file deferred until the first additional
+   maintainer.** BUILD-PLAN row 5 doesn't mandate a separate
+   `MAINTAINERS` file; until there is a second name to roster,
+   splitting it out from GOVERNANCE.md § Current roster would be
+   over-architecture. When the first additional maintainer is
+   onboarded, the roster moves into a dedicated `MAINTAINERS` file
+   and GOVERNANCE.md § Current roster becomes a one-line pointer.
+10. **Trademark / brand posture inherits BUILD-PLAN row 1.** No
+    registered trademark; brand anchored by domain + GitHub org +
+    consistent display-name use. New addition: a good-faith
+    no-confusing-fork-naming request (forks are permitted under the
+    dual MIT/Apache license but are asked not to use "Superglue Pro"
+    as their primary brand name to avoid downstream confusion). This
+    is a request rooted in good-faith branding norms, not a legal
+    restriction; the dual license itself imposes no naming constraint.
+11. **No `CODE_OF_CONDUCT.md` or `SECURITY.md` edits this session.**
+    The session-3 follow-up on `CODE_OF_CONDUCT.md § Reporting an
+    Issue` and the session-4 follow-up on `SECURITY.md` triage-group
+    references both said *"becomes actionable in session 5 only if a
+    TSC is seated then; otherwise the bootstrap-maintainer language
+    continues to be correct."* No TSC is seated this session
+    (single-maintainer pre-alpha), so the bootstrap language remains
+    correct in both files. They do not require an edit; their
+    existing forward-pointers continue to work.
+12. **No ADR planned by default for session 5.** Same posture as
+    sessions 3 and 4: governance shape is well-grounded in the CNCF
+    MVG canonical pattern + BUILD-PLAN row 5's threshold, not a
+    controversial architectural decision. The maintainer may choose to
+    record `ADR-007 — Governance shape: single-maintainer with CNCF
+    MVG-style TSC path` in session 7 alongside the planned ADR-001..006
+    back-fills if the format invites it. Otherwise the rationale stays
+    in this log + GOVERNANCE.md.
+
+### Files
+
+| Action | Path | Note |
+|---|---|---|
+| add | `GOVERNANCE.md` | Role ladder (User → Contributor → Reviewer → Committer → Maintainer → TSC, the latter latent); decision making (routine PR / architectural-RFC / public-surface / governance / CoC enforcement / security disclosure); TSC formation path (≥3 active maintainers in prior 6 months trigger; 5 seats odd-sized; 1-year staggered terms; ≤⅔ from a single employer; supermajority thresholds); succession & continuity (domain transfer via united-domains; GitHub org-transfer per GitHub deceased-user policy; dual-license fork-friendliness as the ultimate safety net); conflict-of-interest disclosure (3 categories: employer, downstream-consumer financial relationship >USD 1,000/mo or >0.1% equity, competing-tool authorship); CoC pointer (CV 3.0 + Community Moderators role inheritance); trademark posture (BUILD-PLAN inheritance + good-faith no-confusing-fork-naming request); higher-bar self-update process (RFC + 30-day window + supermajority-once-seated). Adapts CNCF Project Template + MVG v1; attribution preserved in the document footer. |
+| modify | `CONTRIBUTING.md` | + new `## Governance` section between `## ADRs` and `## Code of Conduct` pointing at `GOVERNANCE.md` and noting the TSC trigger + the higher-bar self-update process. § Submitting changes step 7 ("becomes binding once a second maintainer is added") now links to `GOVERNANCE.md § Adding the first additional maintainer`. |
+| modify | `CHANGELOG.md` | + Added: `GOVERNANCE.md`. + Decided: TSC trigger threshold (≥3 active maintainers in prior 6 months); role ladder (CNCF five-plus-one); succession & continuity posture; conflict-of-interest disclosure scope; GOVERNANCE.md self-update process; ADR back-fill posture (defer to session 7); `MAINTAINERS` file deferred. + Changed: `CONTRIBUTING.md` (governance section + step 7 link). |
+| modify | `SESSION-LOG.md` | This entry. |
+
+### Per-session gate sweep
+
+| # | Gate | Status |
+|---:|---|---|
+| 11 | License + supply-chain green | ✅ No new dependencies introduced. The single new doc dependency is the CNCF Project Template + MVG v1 (Apache-2.0 / CC-BY-4.0); compatible side-by-side with `MIT OR Apache-2.0` because distinct documents under distinct licences are independently distributable. Attribution preserved in the GOVERNANCE.md footer. |
+| 13 | CHANGELOG.md updated | ✅ Added / Decided / Changed entries land alongside files. |
+| 16 | Glue-only honored | ✅ CNCF MVG + Project Template scaffold adopted as the structural skeleton; nothing reinvented. |
+| 1, 2, 3, 4, 17 | Expert / reviewers / RFC / ADR / 48 h public review | ⚠️ Symbolic during bootstrap, same posture as sessions 1–4. RFC repo not built yet (BUILD-PLAN session 6); ADR format not built yet (session 7); a session-5 ADR-007 ("Governance shape: single-maintainer with CNCF MVG-style TSC path") is at the maintainer's discretion in session 7. 48 h public-review symbolic on a meta-repo with one contributor; the same self-discipline posture applied in sessions 1–4 continues here. The 30-day governance-change window documented in GOVERNANCE.md § Updating this document begins to apply to *future* GOVERNANCE.md changes; this session establishes the document and is itself a bootstrap commit, same as the other governance docs in sessions 1–4. |
+| 5–10, 12, 14–15, 18–19 | Test/perf/repro/SemVer/security/SBOM/random-repo | N/A — no Rust code, no CI matrix, no release, no fixture corpus at this stage. |
+
+### Deferred follow-ups
+
+- **Session 6 (next) — RFC repo + first RFC template.** Once
+  `supergluepro/rfcs` exists, every "open an RFC against
+  `supergluepro/rfcs`" pointer in `GOVERNANCE.md` (lines covering
+  architectural changes, maintainer nominations, TSC formation, and
+  GOVERNANCE.md self-updates) becomes a live link to a working
+  template. No file edit needed in `GOVERNANCE.md` itself; the path
+  works whether or not the repo is created yet (broken link until
+  then, by design of the BUILD-PLAN sequencing).
+- **Session 7 — ADR back-fills.** Maintainer's choice on whether to
+  record `ADR-007 — Governance shape: single-maintainer with CNCF
+  MVG-style TSC path` alongside the planned ADR-001..006 back-fills.
+  Rationale already lives in this log + GOVERNANCE.md whether or not
+  an ADR is created.
+- **Session 8 — PR + code-review templates.** Mechanise gates 1–19
+  as PR-template checklists. The PR template should reference
+  `GOVERNANCE.md § Decision making` for the routine-PR / architectural
+  / public-surface / governance change-type matrix in addition to the
+  BUILD-PLAN gate list.
+- **First additional maintainer onboarding (post-`v0.1.0` recruitment
+  per BUILD-PLAN Phase B end).** When this happens, three things
+  follow:
+  1. RFC against `supergluepro/rfcs` with a 30-day window + transition
+     plan, per GOVERNANCE.md § Adding the first additional maintainer.
+  2. Roster moves out of GOVERNANCE.md § Current roster into a
+     dedicated `MAINTAINERS` file; § Current roster becomes a
+     one-line pointer.
+  3. CONTRIBUTING.md § Submitting changes step 7 ("becomes
+     substantively binding once a second maintainer is added") flips
+     from forward-looking to live; gate 17 (48 h public review)
+     becomes binding rather than symbolic.
+- **TSC seating (≥3 active maintainers reached).** When triggered:
+  1. Any existing maintainer opens an RFC against `supergluepro/rfcs`
+     formally seating the TSC per GOVERNANCE.md § Trigger and formation.
+  2. `CODE_OF_CONDUCT.md § Reporting an Issue` updates from
+     "Community Moderators role is filled by the project maintainer"
+     to "Community Moderators role is filled by the seated TSC
+     (or its delegated Conduct Committee, if so resolved)."
+  3. `SECURITY.md` updates from "the single maintainer triages" to
+     "the seated Security Response Group triages."
+  4. `MAINTAINERS` file (if not already created) lands here at the
+     latest; TSC seat assignments documented.
+  5. GOVERNANCE.md § Current roster updates to reflect the new
+     governance shape; the "(latent)" markers on the TSC sections
+     are removed.
+- **End of Phase A (when `supergluepro/superglue` flips public):**
+  Replicate `GOVERNANCE.md` in that repo with code-side governance
+  concretised (e.g. who has merge rights on `supergluepro/superglue`
+  vs `supergluepro/patterns` vs `supergluepro/fixture-corpus` once
+  Reviewers / Committers exist in those repos). The meta-repo's
+  document remains authoritative for project-wide governance; the
+  production repo's document extends with code-specific role
+  privileges.
+- **Conflict-of-interest disclosure for the founding maintainer.**
+  GOVERNANCE.md § Current roster currently lists only the
+  maintainer's name + email. Once `MAINTAINERS` is split out, the
+  roster entry should include the maintainer's primary employer or
+  contracting relationship (per the COI scope decision) at the time
+  of the snapshot. The maintainer self-files the disclosure when the
+  `MAINTAINERS` file is created.
+
+### State for the next session
+
+Tracked tree at the end of session 5:
+
+```
+.github/
+  workflows/
+    dco.yml          — DCO Signed-off-by enforcement on every PR
+.gitignore           — standard + .claude/settings.local.json + user-text.txt excluded
+BUILD-PLAN.md        — v10, "Resolved decisions" section
+CHANGELOG.md         — Keep-a-Changelog 1.1.0; sessions 1+2+3+4+5 entries under [Unreleased]
+CODE_OF_CONDUCT.md   — Contributor Covenant 3.0 verbatim; § Reporting now links to SECURITY.md
+CONTRIBUTING.md      — DCO + Conventional Commits; § Code of Conduct + § Communication link to SECURITY.md; § Governance pointing at GOVERNANCE.md
+GOVERNANCE.md        — role ladder, decision making, TSC formation path, succession & continuity, conflict-of-interest, higher-bar self-update process; CNCF MVG + Project Template scaffold with attribution preserved
+LICENSE-APACHE       — Apache 2.0 full text
+LICENSE-MIT          — MIT
+NOTICE               — minimal Apache-style notice
+README.md            — License + Contributing pointer
+SECURITY.md          — GPVR primary, email backup, PGP placeholder; 90-day window; CVSS v4.0; CVE via GitHub CNA; supported-versions; scope; safe harbor; supply-chain alignment + forward-pointer table
+SESSION-LOG.md       — sessions 1+2+3+4+5
+THREAT-MODEL.md      — v0.1 STRIDE-lite per surface (CLI, output-schema-as-LLM-input, MCP server, pattern library, fixture corpus, build/release, distribution); adversary model; asset inventory; update cadence
+```
+
+Untracked / gitignored: `.claude/settings.local.json` and `user-text.txt`.
+
+Session 6 (RFC repo setup + first RFC template) is the next BUILD-PLAN
+row. Rust-language-team alum lead. Repo: `supergluepro/rfcs`.
+Deliverables to scope at the top of session 6:
+
+- Create the `supergluepro/rfcs` GitHub repository (public from day
+  one).
+- Adopt the [Rust language team RFC template](https://github.com/rust-lang/rfcs/blob/master/0000-template.md)
+  as the project's RFC template (CC0 / Apache-2.0 + MIT — same
+  posture-fit as CNCF MVG and CV 3.0; canonical, not reinvented).
+- Document the RFC process in the new repo's README: ≥10-day public
+  comment window for routine architectural RFCs, 30-day window for
+  governance-document RFCs (per GOVERNANCE.md § Updating this
+  document), 30-day window for first-additional-maintainer RFCs, two
+  reviewer approvals, the path from RFC merge to ADR back-fill.
+- Cross-link from `BUILD-PLAN.md`, `README.md`, `CONTRIBUTING.md`,
+  `GOVERNANCE.md` — every "open an RFC against `supergluepro/rfcs`"
+  pointer becomes a live link.
+
+Once session 6 ships, every cross-document RFC pointer in this repo
+flips from "(once that repo is created in session 6)" to a live link.
+
+---
+
 ## Session 4 — SECURITY.md + threat-model v0.1 (2026-04-26)
 
 **Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)

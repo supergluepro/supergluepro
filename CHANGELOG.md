@@ -63,6 +63,23 @@ from Conventional Commit messages; until then it is hand-edited.
   marks built-vs-planned-for-session-N; methodology and adversary-model
   assumptions documented up front. Bump cadence: revised whenever an
   architectural surface lands; major bumps at each Phase milestone.
+- `GOVERNANCE.md` (BUILD-PLAN session 5): role ladder (User → Contributor
+  → Reviewer → Committer → Maintainer → TSC, the latter latent), decision
+  making (routine PR / architectural-RFC / public-surface / governance /
+  CoC enforcement / security disclosure), Technical Steering Committee
+  formation path (trigger: ≥3 active maintainers in prior 6 months;
+  default 5 seats odd-sized; 1-year staggered terms; supermajority
+  thresholds documented), succession & continuity (single-maintainer
+  bus-factor acknowledged; domain transfer via united-domains; GitHub
+  org-transfer per the GitHub deceased-user policy; dual-license
+  fork-friendliness as the safety net), conflict-of-interest disclosure
+  norms (employer, downstream-consumer financial relationships,
+  competing-tool authorship), trademark posture (point at BUILD-PLAN's
+  "stay generic" decision plus a good-faith no-confusing-fork-naming
+  request), and a higher-bar self-update process (RFC + 30-day window +
+  supermajority-once-seated). Adapts the CNCF Project Template +
+  Minimum Viable Governance v1 scaffold; attribution preserved in the
+  document footer.
 
 ### Decided
 
@@ -122,6 +139,54 @@ from Conventional Commit messages; until then it is hand-edited.
   (Typomania, crate-quarantine RFC, provenance tracking) is **ambient
   discipline** in BUILD-PLAN Phase I — adopted as outputs ship; tracked
   in `SECURITY.md` § Supply-chain alignment.
+- TSC trigger threshold: **≥3 active maintainers in the prior 6 months**
+  (active = at least one substantive contribution or review) per the
+  CNCF norm. Threshold itself comes from BUILD-PLAN row 5 ("≥3
+  maintainers triggers TSC formation"); the active-window form makes
+  the trigger objectively measurable rather than a head-count of past
+  appointees.
+- Role ladder: **User → Contributor → Reviewer → Committer → Maintainer
+  → TSC** — the CNCF five-plus-one ladder. Documented up front so
+  future contributors can step into them naturally; at single-maintainer
+  pre-alpha all four upper rungs are filled by the same person. The
+  latent TSC rung activates per the trigger above.
+- Succession & continuity posture: **single-maintainer bus factor
+  acknowledged; domain transfer via united-domains; GitHub
+  org-transfer per the GitHub deceased-user policy; dual-license
+  fork-friendliness as the ultimate safety net.** No private signing
+  keys exist yet (BUILD-PLAN session 25 introduces Sigstore-keyless
+  OIDC, which by design has no long-lived secret to transfer); release
+  signing succession is therefore a non-issue once the keyless flow
+  ships. The single most effective continuity mechanism is adding the
+  first additional maintainer; that transition gets a 30-day RFC
+  window — twice the standard.
+- Conflict-of-interest disclosure scope: **employer / primary
+  contracting relationship, substantial financial relationship with
+  a downstream consumer (>USD 1,000/month or >0.1% equity as a
+  default soft threshold), and authorship/maintenance of a directly
+  competing tool (Repomix, gitingest, Aider repo-map, similar code-
+  context extractors).** Disclosures live publicly in the GOVERNANCE.md
+  Current roster section (or in `MAINTAINERS` once that file exists).
+  Recusal expected for votes where the conflict applies.
+- GOVERNANCE.md self-update process: **higher bar than other
+  public-surface changes** — RFC + **30-day public comment window**
+  (3× the routine 10-day RFC window) + (until TSC seated) all
+  maintainers approve, (once TSC seated) TSC supermajority with
+  recused votes excluded from the denominator. Emergency exceptions
+  (security / legal) may use a shortened ≥5-day window with public
+  reasoning and are ratified or reverted at the next governance review.
+- ADR back-fill posture for session 5: **defer to session 7 as a
+  maintainer-discretion entry**, same as sessions 1–4. The session-7
+  ADR back-fill list (ADR-001 license, ADR-002 brand, ADR-003 DCO over
+  CLA, ADR-004 in-repo Action over Probot, ADR-005 MCP as v1.0
+  architecture, ADR-006 Claude Code as primary consumer) does not
+  currently include governance; the maintainer chooses whether to add
+  ADR-007 (Governance shape: single-maintainer with CNCF MVG-style
+  TSC path) alongside in session 7.
+- `MAINTAINERS` file: **deferred to first additional maintainer
+  onboarding.** Until then the single roster entry lives in
+  GOVERNANCE.md § Current roster. Splitting it out before there is a
+  second name would be over-architecture.
 
 ### Changed
 
@@ -147,3 +212,9 @@ from Conventional Commit messages; until then it is hand-edited.
   `SECURITY.md`. Security disclosures now route through `SECURITY.md`
   (GPVR primary); `meysam@shiehzadeh.de` remains the Code-of-Conduct
   contact (BUILD-PLAN session 4).
+- CONTRIBUTING.md: + new top-level `## Governance` section pointing at
+  `GOVERNANCE.md`, placed between `## ADRs` and `## Code of Conduct` to
+  match the existing process-section ordering. § Submitting changes
+  step 7 ("becomes binding once a second maintainer is added") now links
+  to `GOVERNANCE.md § Adding the first additional maintainer` (BUILD-PLAN
+  session 5).

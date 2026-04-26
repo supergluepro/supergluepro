@@ -41,8 +41,9 @@ issue.
    mechanises this; until then, self-check against the list.
 7. Allow the **48 h public review window** (gate 17) to elapse before merge for
    any change that touches public surface (BUILD-PLAN, README, governance docs,
-   ADRs, RFCs). Symbolic during bootstrap (one contributor); becomes binding
-   once a second maintainer is added.
+   ADRs, RFCs). Symbolic during bootstrap (one contributor); becomes substantively
+   binding once a second maintainer is added per
+   [GOVERNANCE.md § Adding the first additional maintainer](GOVERNANCE.md#adding-the-first-additional-maintainer).
 
 ## DCO (Developer Certificate of Origin)
 
@@ -164,6 +165,18 @@ directory is created in session 7 and back-fills the early decisions
 (`ADR-001` license, `ADR-002` brand, `ADR-003` DCO over CLA, `ADR-004`
 in-repo workflow over Probot DCO app, `ADR-005` MCP as v1.0 architecture,
 `ADR-006` Claude Code as primary consumer).
+
+## Governance
+
+The project's role ladder (User → Contributor → Reviewer → Committer →
+Maintainer → TSC), decision-making process, conflict-of-interest norms,
+and succession plan are documented in [GOVERNANCE.md](GOVERNANCE.md). The
+project is currently single-maintainer (pre-alpha); a Technical Steering
+Committee activates once ≥3 active maintainers exist (per
+[BUILD-PLAN row 5](BUILD-PLAN.md#phase-a--foundation--early-runnability-sessions-117)).
+Changes to GOVERNANCE.md follow the higher-bar process documented at
+[GOVERNANCE.md § Updating this document](GOVERNANCE.md#updating-this-document)
+(RFC + 30-day window + supermajority once TSC is seated).
 
 ## Code of Conduct
 
