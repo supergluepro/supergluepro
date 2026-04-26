@@ -9,6 +9,148 @@ this single-file format is the bootstrap convention until then.
 
 ---
 
+## Session 3 — CODE_OF_CONDUCT.md (Contributor Covenant 3.0) (2026-04-26)
+
+**Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)
+**BUILD-PLAN row:** session 3 — "CODE_OF_CONDUCT.md (Contributor Covenant 3.0)"
+
+### Decisions resolved
+
+1. **Adopt Contributor Covenant 3.0 verbatim from the canonical source**
+   (`https://www.contributor-covenant.org/version/3/0/code_of_conduct/code_of_conduct.md`).
+   Don't fork, rewrite, or paraphrase. CV 3.0 is the de facto OSS code of
+   conduct in 2026 — adopted by the Linux Foundation, Django (2026-04-15),
+   Rails, Kubernetes, etc. — and reorganises the prior v2.1 into the
+   "Encouraged Behaviors" / "Restricted Behaviors" framing plus a four-rung
+   enforcement ladder (Warning → Temporarily Limited Activities →
+   Temporary Suspension → Permanent Ban) inspired by Mozilla's inclusion team.
+2. **Adopter `[NOTE]` placeholder handling.** CV 3.0 ships with two
+   bracketed editor notes that adopters are expected to resolve:
+   - **Reporting an Issue** `[NOTE: describe your means of reporting here.]`
+     — replaced with project-specific reporting details: email
+     `meysam@shiehzadeh.de`; the "Community Moderators" role referenced
+     throughout the document is filled by the project maintainer until a
+     Technical Steering Committee is seated under `GOVERNANCE.md`
+     (session 5; ≥3 maintainers triggers TSC formation per BUILD-PLAN);
+     a PGP-encrypted disclosure channel for confidential reports follows
+     in `SECURITY.md` (session 4).
+   - **Addressing and Repairing Harm** `[NOTE: The remedies and repairs
+     outlined below are suggestions… edit this section to describe your own
+     policies.]` — removed without replacement. The canonical four-rung
+     ladder is accepted as-is; we do not have a different established
+     enforcement process to substitute.
+3. **License interaction.** CV 3.0 is licensed under
+   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/),
+   stewarded by the Organization for Ethical Source. Including the verbatim
+   text as a separate `CODE_OF_CONDUCT.md` document does not change the
+   project's `MIT OR Apache-2.0` source-code licence; the SA / ShareAlike
+   obligation only triggers for derivative works of the CV text itself, and
+   substituting documented adopter placeholders is normal adoption (the same
+   posture taken by every major OSS project that ships CV). The canonical
+   Attribution paragraph (CC BY-SA 4.0 link, FAQ / translations / resources
+   pointers, Mozilla credit for the ladder) is preserved unmodified at the
+   bottom of the file.
+4. **No ADR planned by default.** CoC adoption is well-established,
+   documented in BUILD-PLAN row 3, and not a controversial architectural
+   decision. The maintainer may choose to record it alongside the
+   session-7 ADR back-fills (after ADR-001 license, ADR-002 brand,
+   ADR-003 DCO-over-CLA, ADR-004 in-repo-Action-over-Probot) if the
+   format invites a "why CV verbatim, why these substitutions" entry.
+   Otherwise the rationale stays in this log + BUILD-PLAN.
+
+### Files
+
+| Action | Path | Note |
+|---|---|---|
+| add | `CODE_OF_CONDUCT.md` | Contributor Covenant 3.0 verbatim from the canonical markdown release; two adopter `[NOTE]` placeholders substituted per decision 2; CC BY-SA 4.0 attribution preserved unmodified. Fetched via `curl -sSfL https://www.contributor-covenant.org/version/3/0/code_of_conduct/code_of_conduct.md`. |
+| modify | `CONTRIBUTING.md` | § Code of Conduct flipped from placeholder ("lands as `CODE_OF_CONDUCT.md` in session 3 / be kind, be specific…") to a live link to `CODE_OF_CONDUCT.md` plus a pointer to the forthcoming PGP-encrypted disclosure channel in `SECURITY.md` (session 4). |
+| modify | `CHANGELOG.md` | + Added: `CODE_OF_CONDUCT.md` entry with the substitution summary. + Decided: adopt CV 3.0 verbatim; canonical four-rung ladder accepted as-is. + Changed: `CONTRIBUTING.md` § Code of Conduct. |
+| modify | `SESSION-LOG.md` | This entry. |
+
+### Per-session gate sweep
+
+| # | Gate | Status |
+|---:|---|---|
+| 11 | License + supply-chain green | ✅ No code dependencies. The single new doc dependency is CV 3.0 (CC BY-SA 4.0); compatible side-by-side with `MIT OR Apache-2.0` because distinct documents under distinct licences are independently distributable. Attribution preserved. |
+| 13 | CHANGELOG.md updated | ✅ Added / Decided / Changed entries land alongside the file. |
+| 16 | Glue-only honored | ✅ Canonical CV 3.0 text adopted verbatim; no parallel CoC reinvented. |
+| 1, 2, 3, 4, 17 | Expert / reviewers / RFC / ADR / 48 h public review | ⚠️ Symbolic during bootstrap, same posture as sessions 1+2. RFC repo not built yet (session 6); ADR format not built yet (session 7); CoC adoption decision is forward-looking and may or may not become an ADR in session 7 (see decision 4). |
+| 5–10, 12, 14–15, 18–19 | Test/perf/repro/SemVer/security/SBOM/random-repo | N/A — no Rust code, no CI matrix, no release, no fixture corpus at this stage. The DCO workflow remains untriggered until the first PR lands; this commit goes direct-to-`main` with `git commit -s` (signed off in the trailer). |
+
+### Deferred follow-ups
+
+- **Session 4 (next):** `SECURITY.md` ships a PGP key + dedicated
+  disclosure channel + 90-day disclosure window + CVE coordination
+  process + explicit RFSI alignment (Typomania, crate-quarantine RFC,
+  provenance tracking). Once it lands, update **CODE_OF_CONDUCT.md
+  § Reporting an Issue** ("A PGP-encrypted disclosure channel for
+  confidential reports, and the formation of a designated Community
+  Moderators group, will be added in upcoming governance sessions…")
+  to refer to the live `SECURITY.md` PGP channel for confidential
+  reports; the same forward-pointer in **CONTRIBUTING.md § Code of
+  Conduct** ("a PGP-encrypted disclosure channel for confidential
+  reports will follow in `SECURITY.md` (BUILD-PLAN session 4)") becomes
+  a live link.
+- **Session 5:** `GOVERNANCE.md` documents the TSC promotion path
+  (≥3 maintainers triggers TSC formation). When a TSC is later seated,
+  update **CODE_OF_CONDUCT.md § Reporting an Issue** to refer to the
+  seated Community Moderators group rather than the single maintainer.
+  No file edit needed in session 5 itself unless a TSC is seated then;
+  the bootstrap-maintainer language is correct until that happens.
+- **Session 6:** RFC repo `supergluepro/rfcs` lands. No CoC-side change
+  needed; CONTRIBUTING.md already points at it as a forward reference.
+- **Session 7:** ADR directory `/adr/` lands. Maintainer's choice on
+  whether to record CoC adoption as an ADR; rationale already lives in
+  this session log + BUILD-PLAN row 3 either way.
+- **End of Phase A (when `supergluepro/superglue` flips public):**
+  replicate `CODE_OF_CONDUCT.md` verbatim in that repo (same CC BY-SA 4.0
+  attribution; same maintainer-fills-Community-Moderators-role
+  language until a TSC is seated).
+- **First live PR after `supergluepro/supergluepro` is on GitHub:**
+  the DCO workflow runs end-to-end for the first time. Until then,
+  DCO sign-off is a self-discipline (every commit on `main` since
+  session 2 carries `Signed-off-by:`). This commit is the second
+  direct-to-`main` `-s`-signed bootstrap commit; the SHA chain so far
+  is `2e3c30a` (session 1, no sign-off — pre-DCO), `553d339` (session 2,
+  no sign-off — added the workflow but pre-existed it on the same
+  `main`-update batch), and this one (first sign-off-bearing commit on
+  `main`).
+
+### State for the next session
+
+Tracked tree at the end of session 3:
+
+```
+.github/
+  workflows/
+    dco.yml          — DCO Signed-off-by enforcement on every PR
+.gitignore           — standard + .claude/settings.local.json + user-text.txt excluded
+BUILD-PLAN.md        — v10, "Resolved decisions" section
+CHANGELOG.md         — Keep-a-Changelog 1.1.0; sessions 1+2+3 entries under [Unreleased]
+CODE_OF_CONDUCT.md   — Contributor Covenant 3.0 verbatim (CC BY-SA 4.0); two adopter placeholders substituted
+CONTRIBUTING.md      — DCO + Conventional Commits; § Code of Conduct now a live link
+LICENSE-APACHE       — Apache 2.0 full text
+LICENSE-MIT          — MIT
+NOTICE               — minimal Apache-style notice
+README.md            — License + Contributing pointer
+SESSION-LOG.md       — sessions 1+2+3
+```
+
+Untracked / gitignored: `.claude/settings.local.json` and `user-text.txt`.
+
+Session 4 (`SECURITY.md` + threat-model v0.1) is the next BUILD-PLAN row.
+NCC / Cure53 / Trail of Bits-tier security expert. Deliverables:
+PGP key generation (or reuse of an existing key on
+`meysam@shiehzadeh.de`); 90-day responsible-disclosure window; CVE
+coordination process; explicit alignment with Rust Foundation Security
+Initiative outputs (Typomania typosquatting detection, crate-quarantine
+RFC, provenance tracking). On landing, the "PGP-encrypted disclosure
+channel will follow…" pointers in `CODE_OF_CONDUCT.md` § Reporting an
+Issue and `CONTRIBUTING.md` § Code of Conduct become live links to
+`SECURITY.md`.
+
+---
+
 ## Session 2 — CONTRIBUTING.md + DCO enforcement (2026-04-26)
 
 **Lead:** solo bootstrap (Claude Opus 4.7 1M-context + Dipl.-Ing.(FH) Meysam Shiehzadeh)

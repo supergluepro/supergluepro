@@ -167,9 +167,11 @@ in-repo workflow over Probot DCO app, `ADR-005` MCP as v1.0 architecture,
 
 ## Code of Conduct
 
-The Contributor Covenant 3.0 lands as `CODE_OF_CONDUCT.md` in session 3.
-Until then: be kind, be specific, assume good faith. Conduct concerns can be
-raised at <meysam@shiehzadeh.de>.
+This project adopts the [Contributor Covenant 3.0](CODE_OF_CONDUCT.md)
+verbatim, with project-specific reporting details substituted into the two
+adopter placeholders. Conduct concerns can be raised at
+<meysam@shiehzadeh.de>; a PGP-encrypted disclosure channel for confidential
+reports will follow in `SECURITY.md` (BUILD-PLAN session 4).
 
 ## License
 

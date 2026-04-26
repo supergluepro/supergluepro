@@ -25,6 +25,20 @@ from Conventional Commit messages; until then it is hand-edited.
   emits per-commit `::error::` annotations on miss. Only third-party action
   used is `actions/checkout@v4` (TODO session 32: SHA-pin per OpenSSF
   Scorecard "Pinned-Dependencies").
+- `CODE_OF_CONDUCT.md` (BUILD-PLAN session 3): Contributor Covenant 3.0
+  verbatim, fetched from
+  <https://www.contributor-covenant.org/version/3/0/code_of_conduct/code_of_conduct.md>.
+  Two adopter placeholders substituted: the **Reporting an Issue** `[NOTE]`
+  is replaced with project-specific reporting details (email
+  `meysam@shiehzadeh.de`; the "Community Moderators" role is filled by the
+  single project maintainer until a TSC is seated under `GOVERNANCE.md`,
+  session 5; PGP-encrypted disclosure follows in `SECURITY.md`, session 4).
+  The **Addressing and Repairing Harm** editor `[NOTE]` is removed; the
+  canonical four-rung enforcement ladder (Warning → Temporarily Limited
+  Activities → Temporary Suspension → Permanent Ban) is accepted as-is.
+  The CC BY-SA 4.0 attribution footer (Organization for Ethical Source
+  stewardship, FAQ / translations / resources links, Mozilla credit for the
+  ladder) is preserved unmodified.
 
 ### Decided
 
@@ -41,6 +55,15 @@ from Conventional Commit messages; until then it is hand-edited.
   Probot DCO App. Keeps the gate self-contained, avoids a third-party app
   dependency, aligns with the "GitHub-only public surface" constraint. Will
   be back-filled as ADR-004 in session 7.
+- Code of Conduct: **adopt Contributor Covenant 3.0 verbatim** (canonical
+  text, not a fork or rewrite). The four-rung enforcement ladder is
+  accepted as the project default; the editor `[NOTE]` advising adopters
+  to substitute their own ladder is removed without replacement. CV 3.0 is
+  CC BY-SA 4.0 — included as a separate document with full attribution
+  preserved; the rest of the project remains `MIT OR Apache-2.0`. To be
+  back-filled as a forward-looking note alongside the session-7 ADRs if
+  the maintainer chooses to record CoC adoption as a project decision;
+  no ADR planned otherwise.
 
 ### Changed
 
@@ -51,3 +74,8 @@ from Conventional Commit messages; until then it is hand-edited.
   of the "Superglue Pro" brand throughout the doc); + top-level "## Contributing"
   section pointing at `CONTRIBUTING.md` and summarising the DCO + Conventional
   Commits requirements (BUILD-PLAN session 2).
+- CONTRIBUTING.md § Code of Conduct: replaced the placeholder
+  ("The Contributor Covenant 3.0 lands as `CODE_OF_CONDUCT.md` in session 3.
+  Until then: be kind…") with a live link to `CODE_OF_CONDUCT.md` and a
+  pointer to the forthcoming PGP-encrypted disclosure channel in
+  `SECURITY.md` (BUILD-PLAN session 4) (BUILD-PLAN session 3).
