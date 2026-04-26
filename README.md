@@ -38,6 +38,16 @@ Production code, patterns, AI_CONTEXT templates, and grammar integrations live i
 - **Claude Code is the canonical consumer.** Humans hint; Claude Code runs. CLI ergonomics, output schemas, MCP tools, and docs all optimise for that flow.
 - **Tool runnable from end of Phase A.** `v0.0.1-alpha` ships at session 14; the senior dev for any later session can ask Claude Code to verify the latest implementation against any open GitHub repo.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process. Highlights: every
+commit must carry a [DCO `Signed-off-by:` trailer](CONTRIBUTING.md#dco-developer-certificate-of-origin)
+(`git commit -s`) — enforced on every PR by [`.github/workflows/dco.yml`](.github/workflows/dco.yml).
+Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+Architectural changes go through an RFC ([`supergluepro/rfcs`](https://github.com/supergluepro/rfcs),
+populated from session 6); internal "why this not that" decisions go into ADRs
+in this repo's `/adr/` (populated from session 7).
+
 ## License
 
 Licensed under either of:

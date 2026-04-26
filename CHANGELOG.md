@@ -15,6 +15,16 @@ from Conventional Commit messages; until then it is hand-edited.
   `LICENSE-MIT`, `LICENSE-APACHE`, and `NOTICE` files committed; `README.md`
   carries the Rust-ecosystem standard dual-license footer and contributor
   inbound-license clause.
+- `CONTRIBUTING.md` (BUILD-PLAN session 2): DCO `Signed-off-by:` trailer
+  required on every commit (`git commit -s`); Conventional Commits enforced
+  for `git-cliff` compatibility from session 58; pointers to RFC repo
+  (session 6), ADR directory (session 7), and `CODE_OF_CONDUCT.md` (session 3).
+- `.github/workflows/dco.yml` (BUILD-PLAN session 2): hand-rolled DCO
+  verification on every PR. Iterates non-merge commits between PR base and
+  head, verifies a `Signed-off-by:` trailer via `git interpret-trailers`,
+  emits per-commit `::error::` annotations on miss. Only third-party action
+  used is `actions/checkout@v4` (TODO session 32: SHA-pin per OpenSSF
+  Scorecard "Pinned-Dependencies").
 
 ### Decided
 
@@ -23,6 +33,14 @@ from Conventional Commit messages; until then it is hand-edited.
   2026-04-15 via united-domains GmbH; expires 2027-04-15) and the
   `supergluepro` GitHub org. Will be back-filled as ADR-002 in session 7. The
   previous "register `Superglue Pro`" working assumption is retired.
+- Inbound contributor attestation: **DCO, not a CLA.** Linux-kernel-style
+  sign-off attests right-to-submit; the Apache-2.0-§5-style clause in
+  `README.md` is the actual licensing mechanism. CLA rejected as heavier than
+  necessary for permissive OSS. Will be back-filled as ADR-003 in session 7.
+- DCO enforcement mechanism: **in-repo GitHub Actions workflow**, not the
+  Probot DCO App. Keeps the gate self-contained, avoids a third-party app
+  dependency, aligns with the "GitHub-only public surface" constraint. Will
+  be back-filled as ADR-004 in session 7.
 
 ### Changed
 
@@ -30,4 +48,6 @@ from Conventional Commit messages; until then it is hand-edited.
   "Resolved decisions" with the trademark and license outcomes recorded.
 - README.md: "Open decisions before session 1" section removed (both decisions
   resolved; outcomes now reflected in the License section and consistent use
-  of the "Superglue Pro" brand throughout the doc).
+  of the "Superglue Pro" brand throughout the doc); + top-level "## Contributing"
+  section pointing at `CONTRIBUTING.md` and summarising the DCO + Conventional
+  Commits requirements (BUILD-PLAN session 2).

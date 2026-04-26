@@ -1,0 +1,59 @@
+name: DCO
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: dco-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  signoff:
+    name: Verify Signed-off-by trailer on every commit
+    runs-on: ubuntu-latest
+    steps:
+      # TODO(session-32): SHA-pin actions per OpenSSF Scorecard "Pinned-Dependencies".
+      # Renovate (session 20) will manage digest updates once enabled.
+      - name: Checkout PR with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Check DCO sign-off on every PR commit
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if ! git cat-file -e "$BASE_SHA" 2>/dev/null; then
+            git fetch --no-tags --depth=2147483647 origin "$BASE_SHA"
+          fi
+
+          missing=0
+          checked=0
+          while IFS= read -r commit; do
+            checked=$((checked + 1))
+            trailers=$(git log -1 --format=%B "$commit" | git interpret-trailers --parse)
+            if ! printf '%s\n' "$trailers" | grep -qE '^Signed-off-by: .+ <.+@.+\..+>$'; then
+              subject=$(git log -1 --format=%s "$commit")
+              author=$(git log -1 --format='%an <%ae>' "$commit")
+              echo "::error title=Missing DCO sign-off::Commit ${commit:0:12} by ${author} has no Signed-off-by trailer. Subject: ${subject}"
+              missing=$((missing + 1))
+            fi
+          done < <(git rev-list --no-merges "$BASE_SHA..$HEAD_SHA")
+
+          echo "Checked ${checked} non-merge commit(s); ${missing} missing sign-off."
+          if [ "$missing" -gt 0 ]; then
+            echo "::error::DCO check failed. Add Signed-off-by to every commit ('git commit --amend --signoff' or 'git rebase --signoff main' + 'git push --force-with-lease'). See CONTRIBUTING.md."
+            exit 1
+          fi
+
+          echo "All commits in this PR carry a valid Signed-off-by trailer."
